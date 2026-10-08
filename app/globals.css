@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0B1B3A;
+  --bg-secondary: #11254B;
+  --bg-card: rgba(17, 37, 75, 0.7);
+  --text-main: #FAF7F0;
+  --text-muted: #94A3B8;
+  --accent-gold: #D4A72C;
+  --accent-gold-hover: #B88E1F;
+  --accent-teal: #14B8A6;
+  --glass-border: rgba(212, 167, 44, 0.25);
+  --glass-bg: rgba(11, 27, 58, 0.75);
+}
+
+.light-mode {
+  --bg-primary: #FAF7F0;
+  --bg-secondary: #FFFFFF;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --text-main: #0B1B3A;
+  --text-muted: #475569;
+  --accent-gold: #D4A72C;
+  --accent-gold-hover: #B88E1F;
+  --accent-teal: #0D9488;
+  --glass-border: rgba(11, 27, 58, 0.15);
+  --glass-bg: rgba(250, 247, 240, 0.85);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+  font-family: var(--font-playfair), serif;
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+}
+
+.glass-nav {
+  background: rgba(11, 27, 58, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212, 167, 44, 0.2);
+}
+
+.light-mode .glass-nav {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(11, 27, 58, 0.1);
+}
+
+/* Custom Gold Button & Gradient Effects */
+.btn-gold {
+  background: linear-gradient(135deg, #D4A72C 0%, #E6C258 50%, #B88E1F 100%);
+  color: #0B1B3A;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(212, 167, 44, 0.3);
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 167, 44, 0.5);
+}
+
+.gold-glow {
+  box-shadow: 0 0 25px rgba(212, 167, 44, 0.4);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFF0C3 0%, #D4A72C 50%, #E6C258 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1B3A;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4A72C;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E6C258;
+}
+
+/* Shimmer Loading Skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-loading {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}

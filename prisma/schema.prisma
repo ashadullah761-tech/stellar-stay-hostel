@@ -1,0 +1,122 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String      @id @default(uuid())
+  name          String
+  email         String      @unique
+  phone         String?
+  role          String      @default("STUDENT") // STUDENT, ADMIN, WARDEN, TECHNICIAN
+  avatar        String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  bookings      Booking[]
+  complaints    Complaint[]
+}
+
+model Room {
+  id                 String    @id @default(uuid())
+  title              String
+  slug               String    @unique
+  roomType           String    // DORM_6, DORM_4, TRIPLE, DOUBLE, SINGLE, STUDIO
+  pricePerNight      Float
+  pricePerMonth      Float
+  sizeSqFt           Int
+  bedType            String
+  capacity           Int
+  floor              String
+  isAc               Boolean   @default(true)
+  hasPrivateBathroom Boolean   @default(false)
+  amenities          String    // JSON string array of amenity codes/labels
+  description        String
+  images             String    // JSON string array of image URLs
+  totalQuantity      Int       @default(5)
+  availableQuantity  Int       @default(5)
+  rating             Float     @default(4.9)
+  reviewCount        Int       @default(12)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  bookings           Booking[]
+  reviews            Review[]
+}
+
+model Booking {
+  id                 String   @id @default(uuid())
+  bookingNumber      String   @unique // e.g. BK-2026-8921
+  userId             String?
+  user               User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guestName          String
+  guestEmail         String
+  guestPhone         String
+  roomId             String
+  room               Room     @relation(fields: [roomId], references: [id])
+  stayType           String   @default("MONTHLY") // NIGHTLY, MONTHLY
+  checkIn            DateTime
+  checkOut           DateTime
+  durationCount      Int      // number of nights or months
+  totalGuests        Int      @default(1)
+  roomPrice          Float
+  taxAmount          Float
+  depositAmount      Float
+  discountAmount     Float    @default(0)
+  grandTotal         Float
+  paymentStatus      String   @default("PENDING") // PENDING, PAID, FAILED, REFUNDED
+  paymentId          String?
+  razorpayOrderId    String?
+  couponCode         String?
+  roomHoldExpiresAt  DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Complaint {
+  id               String    @id @default(uuid())
+  ticketId         String    @unique // e.g. HST-2026-0001
+  studentName      String
+  studentPhone     String
+  roomNumber       String
+  category         String    // FAN, LIGHT, WIFI, AC, WATER, PLUMBING, ELECTRICITY, CLEANLINESS, FURNITURE, OTHER
+  priority         String    @default("MEDIUM") // LOW, MEDIUM, URGENT
+  title            String
+  description      String
+  preferredTime    String?
+  photoUrl         String?
+  status           String    @default("SUBMITTED") // SUBMITTED, ACKNOWLEDGED, IN_PROGRESS, RESOLVED
+  assignedStaff    String?
+  estimatedFixTime String?
+  rating           Int?      // 1-5 stars rating after resolution
+  feedback         String?
+  isAnonymous      Boolean   @default(false)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  userId           String?
+  user             User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model Coupon {
+  id           String    @id @default(uuid())
+  code         String    @unique
+  discountType String    @default("PERCENTAGE") // PERCENTAGE, FIXED
+  value        Float
+  minAmount    Float     @default(0)
+  maxDiscount  Float?
+  expiresAt    DateTime?
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+}
+
+model Review {
+  id          String   @id @default(uuid())
+  roomId      String
+  room        Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  studentName String
+  rating      Int      @default(5)
+  comment     String
+  createdAt   DateTime @default(now())
+}
