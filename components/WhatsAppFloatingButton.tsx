@@ -16,7 +16,7 @@ export default function WhatsAppFloatingButton() {
       href={`https://wa.me/${whatsappNum}?text=${defaultMsg}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 group transition-all duration-300 hover:scale-110 border border-white/20"
+      className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 group transition-all duration-300 hover:scale-110 border border-white/20"
       title="Chat on WhatsApp"
       aria-label="Chat on WhatsApp"
     >

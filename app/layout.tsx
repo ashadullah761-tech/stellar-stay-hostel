@@ -80,7 +80,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
         />
       </head>
-      <body className="font-sans antialiased min-h-screen flex flex-col bg-navy-900 text-slate-100">
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-navy-900 text-slate-100 pb-20 md:pb-0">
         <ThemeProvider>
           <Navbar />
           <main className="flex-1">{children}</main>

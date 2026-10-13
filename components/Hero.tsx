@@ -65,35 +65,37 @@ export default function Hero() {
 
         {/* Floating Glass Search Bar Bar */}
         <div className="glass-card max-w-4xl mx-auto p-4 sm:p-6 rounded-3xl border border-gold-500/40 shadow-2xl text-left">
-          <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4 border-b border-white/10 pb-3">
+            <div className="grid grid-cols-2 sm:flex sm:items-center gap-2">
               <button
                 type="button"
                 onClick={() => setStayType('MONTHLY')}
-                className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                className={`px-3 sm:px-4 py-2 sm:py-1.5 rounded-xl text-xs sm:text-sm font-bold text-center transition-all ${
                   stayType === 'MONTHLY'
                     ? 'bg-gold-500 text-navy-900 shadow-lg'
-                    : 'text-slate-300 hover:text-gold-400'
+                    : 'text-slate-300 hover:text-gold-400 bg-navy-900/60 sm:bg-transparent'
                 }`}
               >
-                Monthly Stay (Students & Pros)
+                <span className="hidden sm:inline">Monthly Stay (Students & Pros)</span>
+                <span className="sm:hidden">Monthly Stay</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setStayType('NIGHTLY')}
-                className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                className={`px-3 sm:px-4 py-2 sm:py-1.5 rounded-xl text-xs sm:text-sm font-bold text-center transition-all ${
                   stayType === 'NIGHTLY'
                     ? 'bg-gold-500 text-navy-900 shadow-lg'
-                    : 'text-slate-300 hover:text-gold-400'
+                    : 'text-slate-300 hover:text-gold-400 bg-navy-900/60 sm:bg-transparent'
                 }`}
               >
-                Nightly Stay (Short Term)
+                <span className="hidden sm:inline">Nightly Stay (Short Term)</span>
+                <span className="sm:hidden">Nightly Stay</span>
               </button>
             </div>
 
-            <span className="hidden sm:flex items-center gap-1 text-xs text-accentTeal-500 font-semibold">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Zero Brokerage
+            <span className="flex items-center justify-center sm:justify-start gap-1 text-xs text-accentTeal-500 font-semibold">
+              <CheckCircle2 className="w-3.5 h-3.5" /> Zero Brokerage & Instant Move-in
             </span>
           </div>
 

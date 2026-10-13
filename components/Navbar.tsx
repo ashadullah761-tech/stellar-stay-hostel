@@ -160,7 +160,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden glass-card mt-3 mx-4 p-5 rounded-2xl border border-gold-500/30 animate-in fade-in slide-in-from-top-4 duration-200">
+        <div className="lg:hidden glass-card mt-3 mx-4 p-5 rounded-2xl border border-gold-500/30 max-h-[85vh] overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-200 shadow-2xl">
           <nav className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <Link
